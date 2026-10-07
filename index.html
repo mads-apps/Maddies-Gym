@@ -297,6 +297,11 @@ Object.assign(MOVES,{
   sideplank:{view:"Front view",phases:["Hips down","Lift into a straight line"],kit:[FLOOR,MAT],
     a:{head:[92,110],neck:[114,128],hip:[186,180],limbs:[{type:"arm",a:[114,130],m:[112,196],e:[70,200],far:1},{type:"leg",m:[222,186],e:[266,198],far:1},{type:"leg",m:[226,190],e:[270,202]},{type:"arm",a:[118,124],m:[150,142],e:[184,166]}]},
     b:{head:[92,104],neck:[114,124],hip:[186,150],limbs:[{type:"arm",a:[114,130],m:[112,196],e:[70,200],far:1},{type:"leg",m:[222,174],e:[266,198],far:1},{type:"leg",m:[226,178],e:[270,202]},{type:"arm",a:[118,124],m:[150,130],e:[184,140]}]}},
+  cableabd:{view:"Front view",phases:["Feet together","Sweep the leg out"],torsoW:34,kit:[FLOOR,{t:"rect",c2:[30,112],w:20,h:192,r:6},{t:"circle",c2:[42,198],r:6}],
+    a:{head:[150,30],neck:[150,58],hip:[150,120],limbs:[{type:"leg",a:[140,124],m:[138,166],e:[136,206]},{type:"leg",a:[160,124],m:[162,166],e:[164,206]},{type:"arm",a:[136,64],m:[96,80],e:[44,90]},{type:"arm",a:[164,64],m:[176,96],e:[174,124]}],
+       back:[{t:"line",p:[[42,198],[164,206]],w:2,c:"#B98597",dash:1}]},
+    b:{head:[146,30],neck:[148,58],hip:[150,120],limbs:[{type:"leg",a:[140,124],m:[138,166],e:[136,206]},{type:"leg",a:[160,124],m:[196,156],e:[230,186]},{type:"arm",a:[136,64],m:[96,80],e:[44,90]},{type:"arm",a:[164,64],m:[176,96],e:[174,124]}],
+       back:[{t:"line",p:[[42,198],[230,186]],w:2,c:"#B98597",dash:1}]}},
   child:{view:"Side view",phases:["Breathe in","Breathe out, sink back"],kit:[FLOOR,MAT],
     a:{head:[78,190],neck:[100,178],hip:[176,176],limbs:[{type:"leg",m:[126,200],e:[196,204]},{type:"arm",m:[60,196],e:[22,200]}]},
     b:{head:[72,194],neck:[96,182],hip:[172,184],limbs:[{type:"leg",m:[126,200],e:[196,204]},{type:"arm",m:[54,198],e:[14,202]}]}},
@@ -429,6 +434,10 @@ Object.assign(EX,{
    cue:"Your shoulder should feel strong, not strained. Bottom knee down is a perfectly good version.",swap:["plank"]},
  plank:{name:"Forearm plank",kit:"Mat",photo:null,nosnap:1,move:null,sets:"2 × 30 sec",rest:"Straight to the next one",unit:"",step:0,start:0,muscles:["Core"],
    setup:["Forearms on the mat, elbows under shoulders"],steps:["Lift onto your toes or knees","Squeeze glutes, tummy in, long neck","Hold and breathe"],cue:"Quality over time. Stop when your hips sag.",swap:["sideplank"]},
+ cableabd:{name:"Standing cable hip abduction",yt:"standing cable hip abduction ankle strap",kit:"Cable column + ankle strap",photo:"column",move:"cableabd",sets:"3 × 12 each leg",rest:"Rest 45 sec",unit:"lb",step:5,start:10,muscles:["Side glutes","Outer hips"],
+   setup:["Pulley at the lowest notch, ankle strap on the outside leg","Stand side-on to the machine, hold the frame with your near hand"],
+   steps:["Stand tall, soft standing knee","Sweep the strapped leg out to the side, toes facing forward","Pause, then bring it back slowly. Do all reps, then turn around"],
+   cue:"Small and slow. You should feel it high on the side of your bum.",swap:["bridge","goblet"]},
  // Warm-up
  wu_bridge:{name:"Glute bridge",kit:"Mat",photo:null,nosnap:1,move:"bridge",sets:"1 × 15",rest:"",unit:"",step:0,start:0,muscles:["Glutes"],warm:1,
    setup:["Lie on your back on a mat, knees bent, feet flat"],steps:["Squeeze your glutes and lift your hips","Pause at the top","Lower slowly"],cue:"Wakes your glutes up so they do the work later, not your back.",swap:[]},
@@ -467,7 +476,7 @@ const WARM=["wu_bridge","wu_squat","wu_extrot"];
 const STRETCH=["st_child","st_chest","st_hipflex","st_fig4","st_ham"];
 const DAYS={
   A:{title:"Glutes & legs",time:"About 60 min",main:["hipthrust","legpress","kickback","abduct","reardelt","facepull"],core:["crunch","deadbug","sideplank"]},
-  B:{title:"Upper body & glutes",time:"About 60 min",main:["pulldown","row","kickback","legext","lateral","pushdown","curl"],core:["pallof","woodchop","sideplank"]},
+  B:{title:"Upper body & glutes",time:"About 60 min",main:["pulldown","row","cableabd","legext","lateral","pushdown","curl"],core:["pallof","woodchop","sideplank"]},
 };
 
 
