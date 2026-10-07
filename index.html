@@ -457,8 +457,8 @@ for(const k in LB){EX[k].step=LB[k][0];EX[k].start=LB[k][1];if(LB[k][2])EX[k].se
 EX.hipthrust.setup[2]="Roll the bar over your hips with the pad. The number you log is the plates added, not the bar";
 EX.curl.rest="Superset with pushdowns";
 ["crunch","deadbug","pallof"].forEach(k=>EX[k].rest="Straight to the next one");
-EX.crunch.swap=["deadbug"];EX.deadbug.swap=["crunch"];EX.deadbug.move="deadbug";EX.deadbug.nosnap=1;EX.deadbug.photo=null;
-EX.kickback.swap=["bridge"];
+EX.crunch.swap=["deadbug","plank"];EX.deadbug.swap=["crunch","plank"];EX.pallof.swap=["deadbug","plank"];EX.woodchop.swap=["deadbug","plank"];EX.deadbug.move="deadbug";EX.deadbug.nosnap=1;EX.deadbug.photo=null;
+EX.kickback.swap=["bridge","goblet"];EX.hipthrust.swap=["bridge","goblet"];EX.legpress.swap=["goblet","bridge"];EX.abduct.swap=["adduct","bridge"];
 Object.assign(EX.legpress,{photo:"legpress"});Object.assign(EX.row,{photo:"row"});Object.assign(EX.kickback,{photo:"column"});
 Object.assign(EX.pallof,{photo:"column2"});Object.assign(EX.extrot,{photo:"column2"});Object.assign(EX.cablelat,{photo:"column2"});
 Object.assign(EX.abduct,{photo:"abduct"});Object.assign(EX.adduct,{photo:"abduct"});Object.assign(EX.legext,{photo:"legext"});
@@ -466,7 +466,7 @@ EX.bridge.photo=null;EX.bridge.nosnap=1;EX.bridge.move="bridge";
 const WARM=["wu_bridge","wu_squat","wu_extrot"];
 const STRETCH=["st_child","st_chest","st_hipflex","st_fig4","st_ham"];
 const DAYS={
-  A:{title:"Glutes & legs",time:"About 60 min",main:["hipthrust","legpress","backext","abduct","reardelt","facepull"],core:["crunch","deadbug","sideplank"]},
+  A:{title:"Glutes & legs",time:"About 60 min",main:["hipthrust","legpress","kickback","abduct","reardelt","facepull"],core:["crunch","deadbug","sideplank"]},
   B:{title:"Upper body & glutes",time:"About 60 min",main:["pulldown","row","kickback","legext","lateral","pushdown","curl"],core:["pallof","woodchop","sideplank"]},
 };
 
@@ -547,9 +547,11 @@ function animate(m){
   raf=requestAnimationFrame(frame);
 }
 function openSwap(e){
+  const D=DAYS[day];const today=[...WARM,...D.main,...D.core,...STRETCH].map(s=>order[s]||s);
+  const opts=e.swap.filter(id=>!today.includes(id));
   const box=document.getElementById("swapBox");
   box.innerHTML=`<h4>Not feeling it?</h4><p>Swap ${e.name.toLowerCase()} for something that works the same muscles.</p>`+
-    e.swap.map(id=>{const s=EX[id];return `<button class="row" data-id="${id}"><div class="thumb">${s.photo?`<img src="${PHOTOS[s.photo]}" alt="">`:(s.move?miniFig(s.move):"")}</div><div><div class="name">${s.name}</div><div class="meta">${s.kit}</div></div><span>›</span></button>`}).join("")+
+    (opts.length?"":`<p>Everything similar is already in today's plan, so skip this one today.</p>`)+opts.map(id=>{const s=EX[id];return `<button class="row" data-id="${id}"><div class="thumb">${s.photo?`<img src="${PHOTOS[s.photo]}" alt="">`:(s.move?miniFig(s.move):"")}</div><div><div class="name">${s.name}</div><div class="meta">${s.kit}</div></div><span>›</span></button>`}).join("")+
     `<button class="btn soft" id="swapCancel">Keep ${e.name.toLowerCase()}</button>`;
   const sw=document.getElementById("swaps");sw.hidden=false;
   box.querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>{order[cur.slot]=b.dataset.id;store.set("order",order);sw.hidden=true;renderList();openCard(cur.slot)});
